@@ -19,8 +19,5 @@ void Map2D::DisplayMap()
 {
 	for (int y = 0; y < MAX_HEIGHT; ++y)
 		for (int x = 0; x < MAX_WIDTH; ++x)
-		{
-			GoToXY(x, y);
 			_map[y][x].Display();
-		}
 }
