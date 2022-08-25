@@ -87,3 +87,8 @@ void Bomb::PowerUp()
 {
 	if (_power < 5) ++_power;
 }
+
+void Bomb::ResetBomb()
+{
+	_power = 1;
+}

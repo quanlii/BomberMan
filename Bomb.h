@@ -19,6 +19,7 @@ public:
 	bool	BombExplosion(Map2D& map, Portal portal, Brick &brick, Point2D player);
 	void	SetBomb(int x, int y, Map2D map);
 	void	PowerUp();
+	void	ResetBomb();
 private:
 
 };

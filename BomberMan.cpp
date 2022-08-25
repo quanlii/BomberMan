@@ -4,10 +4,10 @@ using namespace std;
 
 BomberMan::BomberMan()
 {
-	_speed = 200;
+	_speed = 100;
 	_direction = 80;
 	_bomberMan = Point2D(1, 1, 'X');
-	_liveLeft = 1;
+	_liveLeft = 3;
 }
 
 BomberMan :: ~BomberMan()
@@ -17,7 +17,14 @@ BomberMan :: ~BomberMan()
 void BomberMan::Display()
 {
 	_bomberMan.Display();
-	GoToXY(0, MAX_HEIGHT); cout << "Remaining lives: " << _liveLeft;
+}
+
+void BomberMan::ResetBomberMan(Bomb &bomb)
+{
+	--_liveLeft; _speed = 100;
+	bomb.ResetBomb();
+	_bomberMan = Point2D(1, 1, 'X');
+	_bomberMan.Display();
 }
 
 bool BomberMan::CheckIsDead()
@@ -78,7 +85,7 @@ void BomberMan::Move(Map2D& map, char direction, Bomb bomb)
 
 void BomberMan::SpeedUp()
 {
-	if (_speed > 50) _speed -= 50;
+	if (_speed > 25) _speed -= 25;
 }
 
 bool BomberMan::CheckPosition(int x, int y, Map2D map)

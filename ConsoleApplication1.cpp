@@ -49,6 +49,7 @@ int main()
 	//thread buttonPress(MyButtonPress, &player, ref(bomb), wall, brick, portal);
 	//thread t1(Pause, true);
 	map.DisplayMap();
+	GoToXY(0, MAX_HEIGHT);  cout << "Remaining lives: " << player._liveLeft;
 	while (!brick.IsDestroyed() && player._liveLeft)
 	{
 		if (_kbhit())
@@ -60,7 +61,12 @@ int main()
 		}
 		player.Display();
 		player.GetPortal(map, bomb, portal);
-		if (!bomb._isExplosion) player._liveLeft -= bomb.BombExplosion(map, portal, brick, player._bomberMan);
+		if (!bomb._isExplosion)
+			if (bomb.BombExplosion(map, portal, brick, player._bomberMan))
+			{
+				player.ResetBomberMan(bomb);
+				GoToXY(17, MAX_HEIGHT); cout << player._liveLeft;
+			}
 	}
 
 	system("CLS");

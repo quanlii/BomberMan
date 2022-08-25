@@ -22,6 +22,7 @@ public:
 	void	TurnLeft(Map2D map);
 	void	TurnRight(Map2D map);
 	void	Display();
+	void	ResetBomberMan(Bomb &bomb);
 
 	void	SetBomb(Bomb& bomb, Map2D& map);
 	void	GetPortal(Map2D& map, Bomb& bomb, Portal portal);
