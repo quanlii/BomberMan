@@ -10,5 +10,5 @@ void GoToXY(int x, int y)
 
 int GetRandomNumber(int maxNum)
 {
-	return (((rand() * 214013 + 2531011) >> 16) & 0x7fff) % maxNum;
+	return rand() % maxNum;
 }
