@@ -2,30 +2,30 @@
 #include <iostream>
 using namespace std;
 
-void Brick::InitBrick(Wall wall)
+void Brick::InitBrick(Map2D &map)
 {
 	int x, y; bool check;
 	for (int i = 0; i < _numberOfBrick; ++i)
 	{
-		do
+		while (true)
 		{
-			check = true;
 			x = GetRandomNumber(MAX_WIDTH - 2) + 1;
 			y = GetRandomNumber(MAX_HEIGHT - 2) + 1;
-			for (int j = 0; j < wall.GetNumberOfWall(); ++j)
-				if (x == wall._wall[j].GetX() && y == wall._wall[j].GetY()) { check = false; break; }
-			for(int j = 0; j < i; ++j)
-				if (x == _brick[j].GetX() && y == _brick[j].GetY()) { check = false; break; }
-		} while (!check);
-		_brick[i] = Point2D(x, y, 'B');
+			if(map._map[y][x].GetC() == ' ') 
+			{
+				_brick[i] = Point2D(x, y, 'B');
+				map._map[y][x] = _brick[i];
+				break;
+			}
+		} 
+		_isDestroyed[i] = false;
 	}
 }
 
-Brick::Brick(Wall wall)
+Brick::Brick(Map2D &map)
 {
 	_numberOfBrick = MAX_BRICK;
-	_isDestroyed = false;
-	InitBrick(wall);
+	InitBrick(map);
 }
 
 Brick::~Brick() {}
@@ -35,6 +35,6 @@ void Brick::DisplayBrick()
 	for (int i = 0; i < _numberOfBrick; ++i) _brick[i].Display();
 }
 
-bool Brick::IsDestroyed() { return _isDestroyed; }
+//bool Brick::IsDestroyed() { return _isDestroyed; }
 
 int Brick::GetNumberOfBrick() { return _numberOfBrick; }
