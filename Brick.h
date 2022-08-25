@@ -1,21 +1,20 @@
 #pragma once
 #include "Point2D.h"
-#include "Wall.h"
+#include "Map2D.h"
 
 class Brick
 {
 public:
-	Brick(Wall wall);
+	Brick(Map2D &map);
 	~Brick();
 
 	Point2D _brick[MAX_BRICK];
-	bool	IsDestroyed();
-	int		GetNumberOfBrick();
+	bool	_isDestroyed[MAX_BRICK];
 
-	void	InitBrick(Wall wall);
+	//bool	IsDestroyed();
+	int		GetNumberOfBrick();
+	void	InitBrick(Map2D &map);
 	void	DisplayBrick();
 private:
 	int		_numberOfBrick;
-	bool	_isDestroyed;
 };
-
