@@ -2,27 +2,37 @@
 #include <iostream>
 using namespace std;
 
-void Wall::InitWall()
+void Wall::InitWall(Map2D &map)
 {
-	int x, y; bool check;
+	/*int x, y;
 	for (int i = 0; i < _numberOfWall; ++i)
 	{
-		do
+		while (true)
 		{
-			check = true;
 			x = GetRandomNumber(MAX_WIDTH - 2) + 1;
 			y = GetRandomNumber(MAX_HEIGHT - 2) + 1;
-			for (int j = 0; j < i; ++j)
-				if (x == _wall[j].GetX() && y == _wall[j].GetY()) { check = false; break; }
-		} while (!check);
-		_wall[i] = Point2D(x, y, 'W');
-	}
+			if(map._map[y][x].GetC() == ' ') 
+			{
+				_wall[i] = Point2D(x, y, 'W');
+				map._map[y][x] = _wall[i];
+				break;
+			}
+		}
+	}*/
+	_numberOfWall = 0;
+	for(int y = 2; y < MAX_HEIGHT - 1; y += 2)
+		for(int x = 2; x < MAX_WIDTH - 1; x += 2)
+		{
+			_wall[_numberOfWall] = Point2D(x, y, 'W');
+			map._map[y][x] = Point2D(x, y, 'W');
+			_numberOfWall++;
+		}
 }
 
-Wall::Wall() 
+Wall::Wall(Map2D &map) 
 { 
-	_numberOfWall = MAX_WALL;
-	InitWall(); 
+	_numberOfWall = 0;
+	InitWall(map); 
 }
 
 Wall::~Wall()
@@ -30,9 +40,3 @@ Wall::~Wall()
 }
 
 int Wall::GetNumberOfWall() { return _numberOfWall; }
-
-void Wall::DisplayWall()
-{
-	for (int i = 0; i < _numberOfWall; ++i)
-		_wall[i].Display();
-}
