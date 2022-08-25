@@ -5,27 +5,65 @@
 #include "Wall.h"
 #include "Portal.h"
 #include "Brick.h"
+#include "BomberMan.h"
+#include "Bomb.h"
 #include <conio.h>
+#include <thread>
+#include <mutex>
+#include <ctime>
 using namespace std;
+
+void Pause(bool &pause)
+{
+	_getch();
+	pause = false;
+}
+/*
+void MyButtonPress(BomberMan *player, Bomb &bomb, Wall wall, Brick brick, Portal portal)
+{
+	while(1)
+	{
+		if(_kbhit())
+		{
+			char ch = _getch();
+			if(ch == 72) player -> TurnUp();
+			else if(ch == 80) player -> TurnDown();
+			else if(ch == 75) player -> TurnLeft();
+			else if(ch == 77) player -> TurnRight();
+			else if(ch == ' ') player -> SetBomb(bomb, wall, brick, portal);
+		}
+		Sleep(10);
+	}
+}*/
+
+
 
 int main()
 {
-    cout << "Hello World!\n";
-    Map2D map; Wall wall;
-    map.DisplayMap(); wall.DisplayWall();
-    Brick brick(wall); brick.DisplayBrick();
-    Portal portal(brick); 
-    int i = 0;
-    while (1)
-    {
-        if (_kbhit())
-        {
-            char c = _getch();
-            portal.DisplayPortal(portal._portal[i++]);
-            Sleep(1000);
-        }
-    }
-        
+	time_t now = time(0);
+	Map2D map; Wall wall(map);  Brick brick(map);
+	Portal portal(brick); 
+	Bomb bomb; BomberMan player;
+	player.Display(); 
 
-      return 0;
+	//thread buttonPress(MyButtonPress, &player, ref(bomb), wall, brick, portal);
+	//thread t1(Pause, true);
+	map.DisplayMap();
+	while (1)
+	{	
+		if(_kbhit())
+		{
+			char ch = _getch();
+			if(ch == 72 || ch == 80 || ch == 75 || ch == 77) player.Move(map, ch, bomb);
+			else if(ch == ' ') 
+			{
+				int st = player.SetBomb(bomb, map);
+			}
+		}
+		player.Display();
+		player.GetPortal(map, bomb, portal);
+		if(!bomb._isExplosion) bomb.BombExplosion(map, portal);
+	}
+
+	return 0;
 }
