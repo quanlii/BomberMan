@@ -2,7 +2,7 @@
 
 void Map2D::InitMap()
 {
-	for(int y = 0; y < MAX_HEIGHT; ++y)
+	for (int y = 0; y < MAX_HEIGHT; ++y)
 		for (int x = 0; x < MAX_WIDTH; ++x)
 		{
 			if (x == 0 || x == MAX_WIDTH - 1 || y == 0 || y == MAX_HEIGHT - 1)

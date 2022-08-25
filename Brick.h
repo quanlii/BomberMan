@@ -5,15 +5,15 @@
 class Brick
 {
 public:
-	Brick(Map2D &map);
+	Brick(Map2D& map);
 	~Brick();
 
 	Point2D _brick[MAX_BRICK];
-	bool	_isDestroyed[MAX_BRICK];
+	bool	_isDestroyed[MAX_HEIGHT][MAX_WIDTH];
 
-	//bool	IsDestroyed();
+	bool	IsDestroyed();
 	int		GetNumberOfBrick();
-	void	InitBrick(Map2D &map);
+	void	InitBrick(Map2D& map);
 	void	DisplayBrick();
 private:
 	int		_numberOfBrick;

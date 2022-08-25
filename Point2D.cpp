@@ -7,7 +7,7 @@ Point2D::Point2D() {}
 
 Point2D::~Point2D() {}
 
-Point2D::Point2D(int x, int y, char c) 
+Point2D::Point2D(int x, int y, char c)
 {
 	_x = x, _y = y; _c = c;
 }
@@ -33,7 +33,7 @@ void Point2D::Clear()
 	GoToXY(_x, _y);
 	cout << ' ';
 }
- 
+
 void Point2D::MoveUp() { --_y; }
 
 void Point2D::MoveDown() { ++_y; }
@@ -41,4 +41,3 @@ void Point2D::MoveDown() { ++_y; }
 void Point2D::MoveLeft() { --_x; }
 
 void Point2D::MoveRight() { ++_x; }
-

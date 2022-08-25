@@ -12,5 +12,5 @@ public:
 	void	InitMap();
 	void	DisplayMap();
 private:
-	
+
 };

@@ -10,11 +10,9 @@ void Portal::SetPortal(Brick brick)
 		y = brick._brick[i].GetY();
 
 		kind = GetRandomNumber(10000);
-		if (kind % 3== 0) _portal[i] = Point2D(x, y, ' ');
-		else if (kind % 3== 1) _portal[i] = Point2D(x, y, 'S'); //Item speed up
-		else if (kind % 3== 2) _portal[i] = Point2D(x, y, 'P'); //Item power of bomb up
-
-		_isGot[i] = false;
+		if (kind % 3 == 0) _portal[i] = Point2D(x, y, ' ');
+		else if (kind % 3 == 1) _portal[i] = Point2D(x, y, 'S'); //Item speed up
+		else if (kind % 3 == 2) _portal[i] = Point2D(x, y, 'P'); //Item power of bomb up
 	}
 
 }
@@ -35,8 +33,8 @@ int Portal::GetKindOfPortal(Point2D portal)
 
 int	Portal::GetIdOfPortal(int x, int y)
 {
-	for(int i = 0; i < _numberOfPortal; ++i)
-		if(x == _portal[i].GetX() && y == _portal[i].GetY()) return i;
+	for (int i = 0; i < _numberOfPortal; ++i)
+		if (x == _portal[i].GetX() && y == _portal[i].GetY()) return i;
 }
 
 void Portal::DisplayPortal(Point2D portal)

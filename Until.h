@@ -5,7 +5,7 @@
 #define MAX_HEIGHT 17 
 #define MAX_WIDTH 17
 #define MAX_WALL 20
-#define MAX_BRICK 40
+#define MAX_BRICK 100
 
 void GoToXY(int x, int y);
 int GetRandomNumber(int maxNum);

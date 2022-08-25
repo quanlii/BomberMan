@@ -13,7 +13,7 @@
 #include <ctime>
 using namespace std;
 
-void Pause(bool &pause)
+void Pause(bool& pause)
 {
 	_getch();
 	pause = false;
@@ -42,28 +42,30 @@ int main()
 {
 	time_t now = time(0);
 	Map2D map; Wall wall(map);  Brick brick(map);
-	Portal portal(brick); 
+	Portal portal(brick);
 	Bomb bomb; BomberMan player;
-	player.Display(); 
+	player.Display();
 
 	//thread buttonPress(MyButtonPress, &player, ref(bomb), wall, brick, portal);
 	//thread t1(Pause, true);
 	map.DisplayMap();
-	while (1)
-	{	
-		if(_kbhit())
+	while (!brick.IsDestroyed() && player._liveLeft)
+	{
+		if (_kbhit())
 		{
 			char ch = _getch();
-			if(ch == 72 || ch == 80 || ch == 75 || ch == 77) player.Move(map, ch, bomb);
-			else if(ch == ' ') 
-			{
-				int st = player.SetBomb(bomb, map);
-			}
+			if (ch == 72 || ch == 80 || ch == 75 || ch == 77) player.Move(map, ch, bomb);
+			else if (ch == ' ') player.SetBomb(bomb, map);
+			else if (ch == 'p') _getch();
 		}
 		player.Display();
 		player.GetPortal(map, bomb, portal);
-		if(!bomb._isExplosion) bomb.BombExplosion(map, portal);
+		if (!bomb._isExplosion) player._liveLeft -= bomb.BombExplosion(map, portal, brick, player._bomberMan);
 	}
+
+	system("CLS");
+	if (brick.IsDestroyed()) cout << "CHUC MUNG BAN DA CHIEN THANG";
+	else if (player._liveLeft == 0) cout << "GAME OVER";
 
 	return 0;
 }
