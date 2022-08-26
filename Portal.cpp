@@ -43,3 +43,4 @@ void Portal::DisplayPortal(Point2D portal)
 }
 
 int Portal::GetNumberOfPortal() { return _numberOfPortal; }
+
