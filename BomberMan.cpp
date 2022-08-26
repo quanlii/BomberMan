@@ -8,6 +8,7 @@ BomberMan::BomberMan()
 	_direction = 80;
 	_bomberMan = Point2D(1, 1, 'X');
 	_liveLeft = 3;
+	_start = 0;
 }
 
 BomberMan :: ~BomberMan()
@@ -69,7 +70,8 @@ void BomberMan::TurnRight(Map2D map)
 void BomberMan::Move(Map2D& map, char direction, Bomb bomb)
 {
 	int x = _bomberMan.GetX(), y = _bomberMan.GetY();
-	Sleep(_speed);
+	if (_start > 0 && ((clock() - _start) / (double)CLOCKS_PER_SEC) < (float)_speed/1000.0) return;
+	_start = 0;
 	_bomberMan.Clear();
 	if (direction == 72) TurnUp(map);
 	else if (direction == 80) TurnDown(map);
