@@ -12,3 +12,5 @@ int GetRandomNumber(int maxNum)
 {
 	return rand() % maxNum;
 }
+
+
