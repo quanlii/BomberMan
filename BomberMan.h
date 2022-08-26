@@ -15,6 +15,7 @@ public:
 	int		_speed;
 	int		_liveLeft;
 	char	_direction;
+	int		_start;
 
 	void	Move(Map2D& map, char direction, Bomb bomb);
 	void	TurnUp(Map2D map);
