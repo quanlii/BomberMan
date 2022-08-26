@@ -2,7 +2,7 @@
 #include <iostream>
 using namespace std;
 
-void Wall::InitWall(Map2D& map)
+void Wall::InitWall(Map2D* map)
 {
 	/*int x, y;
 	for (int i = 0; i < _numberOfWall; ++i)
@@ -24,19 +24,19 @@ void Wall::InitWall(Map2D& map)
 		for (int x = 2; x < MAX_WIDTH - 1; x += 2)
 		{
 			_wall[_numberOfWall] = Point2D(x, y, 'W');
-			map._map[y][x] = Point2D(x, y, 'W');
+			map->_map[y][x] = Point2D(x, y, 'W');
 			_numberOfWall++;
 		}
 }
 
-Wall::Wall(Map2D& map)
+Wall::Wall(Map2D* map)
 {
 	_numberOfWall = 0;
 	InitWall(map);
 }
 
-Wall::~Wall()
-{
-}
+Wall::Wall() {}
+
+Wall::~Wall() {}
 
 int Wall::GetNumberOfWall() { return _numberOfWall; }

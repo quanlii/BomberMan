@@ -146,6 +146,7 @@
     <ClCompile Include="BomberMan.cpp" />
     <ClCompile Include="Brick.cpp" />
     <ClCompile Include="ConsoleApplication1.cpp" />
+    <ClCompile Include="Game.cpp" />
     <ClCompile Include="Map2D.cpp" />
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="Point2D.cpp" />
@@ -157,6 +158,7 @@
     <ClInclude Include="Bomb.h" />
     <ClInclude Include="BomberMan.h" />
     <ClInclude Include="Brick.h" />
+    <ClInclude Include="Game.h" />
     <ClInclude Include="Map2D.h" />
     <ClInclude Include="Monster.h" />
     <ClInclude Include="Point2D.h" />

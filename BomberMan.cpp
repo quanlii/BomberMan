@@ -2,11 +2,11 @@
 #include "BomberMan.h"
 using namespace std;
 
-BomberMan::BomberMan()
+BomberMan::BomberMan(int x, int y, char icon)
 {
 	_speed = 100;
 	_direction = 80;
-	_bomberMan = Point2D(1, 1, 'X');
+	_bomberMan = Point2D(x, y, icon);
 	_liveLeft = 3;
 	_start = 0;
 }
@@ -20,10 +20,10 @@ void BomberMan::Display()
 	_bomberMan.Display();
 }
 
-void BomberMan::ResetBomberMan(Bomb& bomb)
+void BomberMan::ResetBomberMan(Bomb* bomb)
 {
 	--_liveLeft; _speed = 100;
-	bomb.ResetBomb();
+	bomb->ResetBomb();
 	_bomberMan = Point2D(1, 1, 'X');
 	_bomberMan.Display();
 }
@@ -34,40 +34,40 @@ bool BomberMan::CheckIsDead()
 	return false;
 }
 
-void BomberMan::GetPortal(Map2D& map, Bomb& bomb, Portal portal)
+void BomberMan::GetPortal(Map2D* map, Bomb* bomb, Portal* portal)
 {
 	int x = _bomberMan.GetX(), y = _bomberMan.GetY();
-	if (map._map[y][x].GetC() == 'S') SpeedUp(), map._map[y][x] = Point2D(x, y, ' ');
-	if (map._map[y][x].GetC() == 'P') bomb.PowerUp(), map._map[y][x] = Point2D(x, y, ' ');
+	if (map->_map[y][x].GetC() == 'S') SpeedUp(), map->_map[y][x] = Point2D(x, y, ' ');
+	if (map->_map[y][x].GetC() == 'P') bomb->PowerUp(), map->_map[y][x] = Point2D(x, y, ' ');
 }
 
-void BomberMan::SetBomb(Bomb& bomb, Map2D& map)
+void BomberMan::SetBomb(Bomb* bomb, Map2D* map)
 {
-	if (bomb._isExplosion) bomb.SetBomb(_bomberMan.GetX(), _bomberMan.GetY(), map);
+	if (bomb->_isExplosion) bomb->SetBomb(_bomberMan.GetX(), _bomberMan.GetY(), map);
 }
 
 
-void BomberMan::TurnUp(Map2D map)
+void BomberMan::TurnUp(Map2D* map)
 {
 	if (CheckPosition(_bomberMan.GetX(), _bomberMan.GetY() - 1, map)) _bomberMan.MoveUp();
 }
 
-void BomberMan::TurnDown(Map2D map)
+void BomberMan::TurnDown(Map2D* map)
 {
 	if (CheckPosition(_bomberMan.GetX(), _bomberMan.GetY() + 1, map)) _bomberMan.MoveDown();
 }
 
-void BomberMan::TurnLeft(Map2D map)
+void BomberMan::TurnLeft(Map2D* map)
 {
 	if (CheckPosition(_bomberMan.GetX() - 1, _bomberMan.GetY(), map)) _bomberMan.MoveLeft();
 }
 
-void BomberMan::TurnRight(Map2D map)
+void BomberMan::TurnRight(Map2D* map)
 {
 	if (CheckPosition(_bomberMan.GetX() + 1, _bomberMan.GetY(), map)) _bomberMan.MoveRight();
 }
 
-void BomberMan::Move(Map2D& map, char direction, Bomb bomb)
+void BomberMan::Move(Map2D* map, char direction, Bomb* bomb)
 {
 	int x = _bomberMan.GetX(), y = _bomberMan.GetY();
 	if (_start > 0 && ((clock() - _start) / (double)CLOCKS_PER_SEC) < (float)_speed / 1000.0) return;
@@ -77,10 +77,10 @@ void BomberMan::Move(Map2D& map, char direction, Bomb bomb)
 	else if (direction == 80) TurnDown(map);
 	else if (direction == 75) TurnLeft(map);
 	else if (direction == 77) TurnRight(map);
-	if (!bomb._isExplosion)
+	if (!bomb->_isExplosion)
 	{
-		map._map[bomb._bomb.GetY()][bomb._bomb.GetX()] = Point2D(bomb._bomb.GetX(), bomb._bomb.GetY(), 'O');
-		bomb._bomb.Display();
+		map->_map[bomb->_bomb.GetY()][bomb->_bomb.GetX()] = Point2D(bomb->_bomb.GetX(), bomb->_bomb.GetY(), 'O');
+		bomb->_bomb.Display();
 	}
 }
 
@@ -90,8 +90,16 @@ void BomberMan::SpeedUp()
 	if (_speed > 25) _speed -= 25;
 }
 
-bool BomberMan::CheckPosition(int x, int y, Map2D map)
+bool BomberMan::CheckPosition(int x, int y, Map2D* map)
 {
-	if (map._map[y][x].GetC() == 'S' || map._map[y][x].GetC() == 'P' || map._map[y][x].GetC() == ' ') return true;
+	if (map->_map[y][x].GetC() == 'S' || map->_map[y][x].GetC() == 'P' || map->_map[y][x].GetC() == ' ') return true;
+	return false;
+}
+
+bool BomberMan::CollideMonster(Monster* monster)
+{
+	for (int i = 0; i < MAX_MONSTER; ++i)
+		if (!monster->_checkDead[i] && _bomberMan.GetX() == monster->_monster[i].GetX() && _bomberMan.GetY() == monster->_monster[i].GetY())
+			return true;
 	return false;
 }

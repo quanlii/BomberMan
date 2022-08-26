@@ -1,4 +1,6 @@
 #include "Until.h"
+#include <cstdlib>
+#include <ctime>
 
 void GoToXY(int x, int y)
 {
@@ -12,4 +14,3 @@ int GetRandomNumber(int maxNum)
 {
 	return rand() % maxNum;
 }
-

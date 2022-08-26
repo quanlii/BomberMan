@@ -1,13 +1,13 @@
 #include "Portal.h"
 
-void Portal::SetPortal(Brick brick)
+void Portal::SetPortal(Brick* brick)
 {
 	int x, y, kind;
-	_numberOfPortal = brick.GetNumberOfBrick();
+	_numberOfPortal = brick->GetNumberOfBrick();
 	for (int i = 0; i < _numberOfPortal; ++i)
 	{
-		x = brick._brick[i].GetX();
-		y = brick._brick[i].GetY();
+		x = brick->_brick[i].GetX();
+		y = brick->_brick[i].GetY();
 
 		kind = GetRandomNumber(10000);
 		if (kind % 3 == 0) _portal[i] = Point2D(x, y, ' ');
@@ -17,18 +17,20 @@ void Portal::SetPortal(Brick brick)
 
 }
 
-Portal::Portal(Brick brick)
+Portal::Portal(Brick* brick)
 {
 	SetPortal(brick);
 }
 
+Portal::Portal() {}
+
 Portal::~Portal() {}
 
-int Portal::GetKindOfPortal(Point2D portal)
+int Portal::GetKindOfPortal(Point2D* portal)
 {
-	if (portal.GetC() == ' ') return 0;
-	else if (portal.GetC() == 'S') return 1;
-	else if (portal.GetC() == 'P') return 2;
+	if (portal->GetC() == ' ') return 0;
+	else if (portal->GetC() == 'S') return 1;
+	else if (portal->GetC() == 'P') return 2;
 }
 
 int	Portal::GetIdOfPortal(int x, int y)
@@ -37,9 +39,9 @@ int	Portal::GetIdOfPortal(int x, int y)
 		if (x == _portal[i].GetX() && y == _portal[i].GetY()) return i;
 }
 
-void Portal::DisplayPortal(Point2D portal)
+void Portal::DisplayPortal(Point2D* portal)
 {
-	portal.Display();
+	portal->Display();
 }
 
 int Portal::GetNumberOfPortal() { return _numberOfPortal; }
