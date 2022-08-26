@@ -40,4 +40,3 @@ Wall::~Wall()
 }
 
 int Wall::GetNumberOfWall() { return _numberOfWall; }
-

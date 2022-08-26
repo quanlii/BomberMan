@@ -37,30 +37,30 @@ Sleep(10);
 }
 }*/
 
-void MonsterMove(Monster *monster, Map2D *map, Bomb *bomb, bool finish)
+void MonsterMove(Monster* monster, Map2D* map, Bomb* bomb, bool finish)
 {
 	while (1)
 	{
 		monster->Move(*map, *bomb);
 		monster->Display();
-		if(finish) break;
-		
+		if (finish) break;
+
 	}
 }
 
-void Player1(BomberMan *player, Map2D *map, Bomb *bomb, bool finish)
+void Player1(BomberMan* player, Map2D* map, Bomb* bomb, bool finish)
 {
 	while (1)
 	{
 		player->Display();
-		if(finish) break;
+		if (finish) break;
 	}
 }
 
 int main()
 {
 	Map2D map; Wall wall(map);  Brick brick(map);
-	Portal portal(brick); 
+	Portal portal(brick);
 	Monster monster(map);
 	Bomb bomb; BomberMan player;
 	bool finish = false;
@@ -71,7 +71,6 @@ int main()
 	//thread player1(Player1, &player, &map, &bomb, finish);
 	//thread monsterMove(MonsterMove, &monster, &map, &bomb, finish);
 	int count = 0;
-	int start=clock();
 	while (1)
 	{
 		if (_kbhit())
@@ -92,14 +91,14 @@ int main()
 				GoToXY(17, MAX_HEIGHT); cout << player._liveLeft;
 			}
 		}
-		
+
 		monster.Move(map, bomb);
 		monster.Display();
 
-		if(brick.IsDestroyed() || !player._liveLeft) 
-		{ 
-			finish = true; 
-			break; 
+		if (brick.IsDestroyed() || !player._liveLeft)
+		{
+			finish = true;
+			break;
 		}
 	}
 	system("CLS");

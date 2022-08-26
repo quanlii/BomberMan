@@ -4,7 +4,7 @@ using namespace std;
 
 void Brick::InitBrick(Map2D& map)
 {
-	int x, y; bool check;
+	int x, y;
 	for (int i = 0; i < _numberOfBrick; ++i)
 	{
 		while (true)

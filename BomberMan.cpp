@@ -20,7 +20,7 @@ void BomberMan::Display()
 	_bomberMan.Display();
 }
 
-void BomberMan::ResetBomberMan(Bomb &bomb)
+void BomberMan::ResetBomberMan(Bomb& bomb)
 {
 	--_liveLeft; _speed = 100;
 	bomb.ResetBomb();
@@ -43,7 +43,7 @@ void BomberMan::GetPortal(Map2D& map, Bomb& bomb, Portal portal)
 
 void BomberMan::SetBomb(Bomb& bomb, Map2D& map)
 {
-	if(bomb._isExplosion) bomb.SetBomb(_bomberMan.GetX(), _bomberMan.GetY(), map);
+	if (bomb._isExplosion) bomb.SetBomb(_bomberMan.GetX(), _bomberMan.GetY(), map);
 }
 
 
@@ -70,7 +70,7 @@ void BomberMan::TurnRight(Map2D map)
 void BomberMan::Move(Map2D& map, char direction, Bomb bomb)
 {
 	int x = _bomberMan.GetX(), y = _bomberMan.GetY();
-	if (_start > 0 && ((clock() - _start) / (double)CLOCKS_PER_SEC) < (float)_speed/1000.0) return;
+	if (_start > 0 && ((clock() - _start) / (double)CLOCKS_PER_SEC) < (float)_speed / 1000.0) return;
 	_start = 0;
 	_bomberMan.Clear();
 	if (direction == 72) TurnUp(map);
