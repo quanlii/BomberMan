@@ -1,6 +1,5 @@
 #pragma once
 #include <iostream>
-#include <SFML/Graphics.hpp>
 #include "Until.h"
 #include "Map2D.h"
 #include "Wall.h"
