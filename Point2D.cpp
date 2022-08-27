@@ -41,3 +41,4 @@ void Point2D::MoveDown() { ++_y; }
 void Point2D::MoveLeft() { --_x; }
 
 void Point2D::MoveRight() { ++_x; }
+
