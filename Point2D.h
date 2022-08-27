@@ -25,3 +25,5 @@ private:
 	int _x, _y;
 	char _c;
 };
+
+
