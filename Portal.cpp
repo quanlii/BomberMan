@@ -1,5 +1,7 @@
 #include "Portal.h"
 
+Portal::Portal() {}
+
 void Portal::SetPortal(Brick* brick)
 {
 	int x, y, kind;
@@ -13,6 +15,7 @@ void Portal::SetPortal(Brick* brick)
 		if (kind % 3 == 0) _portal[i] = Point2D(x, y, ' ');
 		else if (kind % 3 == 1) _portal[i] = Point2D(x, y, 'S'); //Item speed up
 		else if (kind % 3 == 2) _portal[i] = Point2D(x, y, 'P'); //Item power of bomb up
+		_isGot[i] = false;
 	}
 
 }
@@ -22,7 +25,6 @@ Portal::Portal(Brick* brick)
 	SetPortal(brick);
 }
 
-Portal::Portal() {}
 
 Portal::~Portal() {}
 
