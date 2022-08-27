@@ -10,7 +10,7 @@ public:
 	~Portal();
 
 	Point2D _portal[MAX_BRICK];
-	//bool	_isGot[MAX_BRICK];
+	bool	_isGot[MAX_BRICK];
 	int		_numberOfPortal;
 
 	int		GetKindOfPortal(Point2D* portal);
@@ -21,3 +21,4 @@ public:
 private:
 
 };
+
