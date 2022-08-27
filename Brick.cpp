@@ -2,6 +2,8 @@
 #include <iostream>
 using namespace std;
 
+Brick::Brick() {}
+
 void Brick::InitBrick(Map2D* map)
 {
 	int x, y;
@@ -31,8 +33,6 @@ Brick::Brick(Map2D* map)
 	InitBrick(map);
 }
 
-Brick::Brick() {}
-
 Brick::~Brick() {}
 
 bool Brick::IsDestroyed()
@@ -42,7 +42,5 @@ bool Brick::IsDestroyed()
 			if (!_isDestroyed[i][j]) return false;
 	return true;
 }
-
-//bool Brick::IsDestroyed() { return _isDestroyed; }
 
 int Brick::GetNumberOfBrick() { return _numberOfBrick; }
