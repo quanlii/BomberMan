@@ -25,6 +25,7 @@ public:
 	void	TurnRight(Map2D* map);
 	void	Display();
 	void	ResetBomberMan(Bomb* bomb);
+	void	ResetBomberManMode2(Bomb* bomb, int x, int y, char icon);
 
 	void	SetBomb(Bomb* bomb, Map2D* map);
 	void	GetPortal(Map2D* map, Bomb* bomb, Portal* portal);
