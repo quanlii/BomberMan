@@ -2,6 +2,7 @@
 #include "Map2D.h"
 #include "Point2D.h"
 #include "Until.h"
+#include <ctime>
 class Monster
 {
 public:
