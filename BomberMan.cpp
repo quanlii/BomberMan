@@ -28,6 +28,14 @@ void BomberMan::ResetBomberMan(Bomb* bomb)
 	_bomberMan.Display();
 }
 
+void BomberMan::ResetBomberManMode2(Bomb* bomb, int x, int y, char icon)
+{
+	--_liveLeft; _speed = 100;
+	bomb->ResetBomb();
+	_bomberMan = Point2D(x, y, icon);
+	_bomberMan.Display();
+}
+
 bool BomberMan::CheckIsDead()
 {
 	if (_liveLeft == 0) return true;
@@ -37,8 +45,19 @@ bool BomberMan::CheckIsDead()
 void BomberMan::GetPortal(Map2D* map, Bomb* bomb, Portal* portal)
 {
 	int x = _bomberMan.GetX(), y = _bomberMan.GetY();
-	if (map->_map[y][x].GetC() == 'S') SpeedUp(), map->_map[y][x] = Point2D(x, y, ' ');
-	if (map->_map[y][x].GetC() == 'P') bomb->PowerUp(), map->_map[y][x] = Point2D(x, y, ' ');
+	int idPortal = portal->GetIdOfPortal(x,y);
+	if (map->_map[y][x].GetC() == 'S' && !portal->_isGot[idPortal]) 
+	{
+		SpeedUp();
+		map->_map[y][x] = Point2D(x, y, ' ');
+		portal->_isGot[idPortal] = true;
+	}
+	if (map->_map[y][x].GetC() == 'P' && !portal->_isGot[idPortal]) 
+	{
+		bomb->PowerUp(),
+		map->_map[y][x] = Point2D(x, y, ' ');
+		portal->_isGot[idPortal] = true;
+	}
 }
 
 void BomberMan::SetBomb(Bomb* bomb, Map2D* map)
@@ -73,10 +92,10 @@ void BomberMan::Move(Map2D* map, char direction, Bomb* bomb)
 	if (_start > 0 && ((clock() - _start) / (double)CLOCKS_PER_SEC) < (float)_speed / 1000.0) return;
 	_start = 0;
 	_bomberMan.Clear();
-	if (direction == 72) TurnUp(map);
-	else if (direction == 80) TurnDown(map);
-	else if (direction == 75) TurnLeft(map);
-	else if (direction == 77) TurnRight(map);
+	if (direction == 72 || direction == 'w') TurnUp(map);
+	else if (direction == 80 || direction == 's') TurnDown(map);
+	else if (direction == 75 || direction == 'a') TurnLeft(map);
+	else if (direction == 77 || direction == 'd') TurnRight(map);
 	if (!bomb->_isExplosion)
 	{
 		map->_map[bomb->_bomb.GetY()][bomb->_bomb.GetX()] = Point2D(bomb->_bomb.GetX(), bomb->_bomb.GetY(), 'O');
