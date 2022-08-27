@@ -95,3 +95,4 @@ bool Monster::IsDeadAll()
 		if (!_checkDead[i]) return false;
 	return true;
 }
+
