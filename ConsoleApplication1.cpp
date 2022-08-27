@@ -1,5 +1,4 @@
 #include <iostream>
-#include <SFML/Graphics.hpp>
 #include "Game.h"
 using namespace std;
 
@@ -10,10 +9,8 @@ int main()
 	Monster monster(&map);
 	Bomb bomb; BomberMan player;
 	bool finish = false;
-
 	map.DisplayMap(); player.Display();
 	GoToXY(0, MAX_HEIGHT);  cout << "Remaining lives: " << player._liveLeft;
-
 	while (1)
 	{
 		if (_kbhit())
@@ -23,7 +20,6 @@ int main()
 			else if (ch == ' ') player.SetBomb(&bomb, &map);
 			else if (ch == 'p') _getch();
 		}
-
 		player.Display();
 		player.GetPortal(&map, &bomb, &portal);
 		if (!bomb._isExplosion)
@@ -39,10 +35,8 @@ int main()
 			player.ResetBomberMan(&bomb); GoToXY(17, MAX_HEIGHT);
 			cout << player._liveLeft;
 		}
-
 		monster.Move(&map);
 		monster.Display();
-
 		if (brick.IsDestroyed()|| !player._liveLeft || monster.IsDeadAll())
 		{
 			finish = true;
