@@ -17,3 +17,4 @@ public:
 private:
 	int _numberOfWall;
 };
+
