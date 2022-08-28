@@ -27,7 +27,7 @@ int main()
 			if (bomb.BombExplosion(&map, &portal, &brick, &player._bomberMan, &monster))
 			{
 				player.ResetBomberMan(&bomb);
-				
+
 			}
 		}
 		if (player.CollideMonster(&monster))
@@ -47,6 +47,8 @@ int main()
 	if (brick.IsDestroyed() || monster.IsDeadAll()) cout << "CHUC MUNG BAN DA CHIEN THANG";
 	else if (player._liveLeft == 0) cout << "GAME OVER";*/
 
+	UI* ui = new UI;
+
 	char turn = 'Y';
 
 	while (turn == 'Y')
@@ -64,7 +66,7 @@ int main()
 			cout << "Your choice: "; cin >> mode;
 		}
 
-		if (mode == 1) newGame->OnePlayerMode();
+		if (mode == 1) newGame->OnePlayerMode(ui);
 		else newGame->TwoPlayersMode();
 		//Sleep(3000);
 
@@ -72,8 +74,6 @@ int main()
 		cin >> turn;
 		turn = toupper(turn);
 	}
-
-
 
 	return 0;
 }
