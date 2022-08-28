@@ -1,6 +1,7 @@
 #pragma once
 #include "Point2D.h"
 #include "Until.h"
+#include "UI.h"
 
 class Map2D
 {
@@ -11,7 +12,7 @@ public:
 
 	void	InitMap();
 	void	DisplayMap();
+	void	DisplayMapUI(sf::Sprite& spBackground, sf::Sprite& spWall, sf::Sprite& spBrick, sf::RenderWindow& window);
 private:
 
 };
-

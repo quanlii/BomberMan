@@ -30,32 +30,36 @@ void BomberMan::ResetBomberMan(Bomb* bomb)
 
 void BomberMan::ResetBomberManMode2(Bomb* bomb, int x, int y, char icon)
 {
-	--_liveLeft; _speed = 100;
-	bomb->ResetBomb();
-	_bomberMan = Point2D(x, y, icon);
+	if(_liveLeft > 0)
+	{
+		--_liveLeft; _speed = 100;
+		bomb->ResetBomb();
+		_bomberMan = Point2D(x, y, icon);
+	}
+	else _bomberMan = Point2D(0, 0, '#');
 	_bomberMan.Display();
 }
 
 bool BomberMan::CheckIsDead()
 {
-	if (_liveLeft == 0) return true;
+	if (_liveLeft <= 0) return true;
 	return false;
 }
 
 void BomberMan::GetPortal(Map2D* map, Bomb* bomb, Portal* portal)
 {
 	int x = _bomberMan.GetX(), y = _bomberMan.GetY();
-	int idPortal = portal->GetIdOfPortal(x,y);
-	if (map->_map[y][x].GetC() == 'S' && !portal->_isGot[idPortal]) 
+	int idPortal = portal->GetIdOfPortal(x, y);
+	if (map->_map[y][x].GetC() == 'S' && !portal->_isGot[idPortal])
 	{
 		SpeedUp();
 		map->_map[y][x] = Point2D(x, y, ' ');
 		portal->_isGot[idPortal] = true;
 	}
-	if (map->_map[y][x].GetC() == 'P' && !portal->_isGot[idPortal]) 
+	if (map->_map[y][x].GetC() == 'P' && !portal->_isGot[idPortal])
 	{
 		bomb->PowerUp(),
-		map->_map[y][x] = Point2D(x, y, ' ');
+			map->_map[y][x] = Point2D(x, y, ' ');
 		portal->_isGot[idPortal] = true;
 	}
 }
@@ -121,4 +125,14 @@ bool BomberMan::CollideMonster(Monster* monster)
 		if (!monster->_checkDead[i] && _bomberMan.GetX() == monster->_monster[i].GetX() && _bomberMan.GetY() == monster->_monster[i].GetY())
 			return true;
 	return false;
+}
+
+void BomberMan::DisplayBomberManUI(sf::Sprite &spBomberMan, sf::RenderWindow &window)
+{
+	if ( _bomberMan.GetC() == 'X') 
+	{
+		spBomberMan.setPosition(_bomberMan.GetX()*SIZE_CELL, _bomberMan.GetY()*SIZE_CELL);
+		window.draw(spBomberMan);
+	}
+
 }

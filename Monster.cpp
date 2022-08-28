@@ -26,7 +26,7 @@ Monster::Monster(Map2D* map)
 	_start = 0;
 }
 
-Monster :: Monster() {}
+Monster::Monster() {}
 
 Monster :: ~Monster() {}
 
@@ -67,7 +67,7 @@ void Monster::Move(Map2D* map)
 	for (int i = 0; i < MAX_MONSTER; ++i)
 	{
 		int x = _monster[i].GetX(), y = _monster[i].GetY();
-		_monster[i].Clear();
+		_monster[i].Clear(); map->_map[y][x].Display();
 		if (_direction[i] == 0) TurnUp(map, &_monster[i], _direction[i]);
 		else if (_direction[i] == 1) TurnDown(map, &_monster[i], _direction[i]);
 		else if (_direction[i] == 2) TurnLeft(map, &_monster[i], _direction[i]);
@@ -78,7 +78,7 @@ void Monster::Move(Map2D* map)
 
 bool Monster::CheckPosition(int x, int y, Map2D* map)
 {
-	if (map->_map[y][x].GetC() == ' ') return true;
+	if (map->_map[y][x].GetC() == ' ' || map->_map[y][x].GetC() == 'S' || map->_map[y][x].GetC() == 'P') return true;
 	return false;
 }
 
@@ -95,4 +95,3 @@ bool Monster::IsDeadAll()
 		if (!_checkDead[i]) return false;
 	return true;
 }
-

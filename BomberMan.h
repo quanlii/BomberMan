@@ -5,6 +5,7 @@
 #include "Portal.h"
 #include "Bomb.h"
 #include "Monster.h"
+#include "UI.h"
 
 class BomberMan
 {
@@ -24,6 +25,8 @@ public:
 	void	TurnLeft(Map2D* map);
 	void	TurnRight(Map2D* map);
 	void	Display();
+	void	DisplayBomberManUI(sf::Sprite& spBomberMan, sf::RenderWindow& window);
+
 	void	ResetBomberMan(Bomb* bomb);
 	void	ResetBomberManMode2(Bomb* bomb, int x, int y, char icon);
 

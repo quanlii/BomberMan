@@ -58,10 +58,10 @@ bool Bomb::BombExplosion(Map2D* map, Portal* portal, Brick* brick, Point2D* play
 				if (idMonster < MAX_MONSTER) monster->_checkDead[idMonster] = true;
 				if (x1 == player->GetX() && y1 == player->GetY()) isBomberManExplosion = true;
 
-				if (map->_map[y1][x1].GetC() == 'W' || map->_map[y1][x1].GetC() == '#') 
-				{ 
-					direct[j] = false; 
-					continue; 
+				if (map->_map[y1][x1].GetC() == 'W' || map->_map[y1][x1].GetC() == '#')
+				{
+					direct[j] = false;
+					continue;
 				}
 				if (map->_map[y1][x1].GetC() == 'B' && !brick->_isDestroyed[y1][x1])
 				{
@@ -81,7 +81,7 @@ bool Bomb::BombExplosion(Map2D* map, Portal* portal, Brick* brick, Point2D* play
 	else return false;
 }
 
-bool Bomb::BombExplosionMode2(Map2D* map, Portal* portal, Brick* brick, Point2D* player, Point2D* competitor, Monster* monster, int &score, bool &checkCompetitor)
+bool Bomb::BombExplosionMode2(Map2D* map, Portal* portal, Brick* brick, Point2D* player, Point2D* competitor, Monster* monster, int& score, bool& checkCompetitor)
 {
 	if (_start > 0 && ((clock() - _start) / (double)CLOCKS_PER_SEC) < 2)
 		return false;
@@ -111,7 +111,6 @@ bool Bomb::BombExplosionMode2(Map2D* map, Portal* portal, Brick* brick, Point2D*
 	}
 	Sleep(90);
 
-	checkCompetitor = false;
 	//Hien thi portal
 	direct[0] = direct[1] = direct[2] = direct[3] = true;
 	for (int i = 1; i <= _power; ++i)
@@ -125,28 +124,28 @@ bool Bomb::BombExplosionMode2(Map2D* map, Portal* portal, Brick* brick, Point2D*
 				int idPortal = portal->GetIdOfPortal(x1, y1);
 				int idMonster = monster->GetIdOfMonster(x1, y1);
 
-				if (idMonster < MAX_MONSTER) 
-				{ 
+				if (idMonster < MAX_MONSTER)
+				{
 					monster->_checkDead[idMonster] = true;
 					score += 100;
 				}
 				if (x1 == player->GetX() && y1 == player->GetY()) isBomberManExplosion = true;
-				if (x1 == competitor->GetX() && y1 == competitor->GetY()) 
+				if (x1 == competitor->GetX() && y1 == competitor->GetY() && !checkCompetitor)
 				{
 					map->_map[y1][x1] = Point2D(x1, y1, ' ');
 					checkCompetitor = true;
 					score += 100;
 				}
 
-				if (map->_map[y1][x1].GetC() == 'W' || map->_map[y1][x1].GetC() == '#') 
-				{ 
-					direct[j] = false; 
-					continue; 
+				if (map->_map[y1][x1].GetC() == 'W' || map->_map[y1][x1].GetC() == '#')
+				{
+					direct[j] = false;
+					continue;
 				}
 
 				if (map->_map[y1][x1].GetC() == 'B' && !brick->_isDestroyed[y1][x1])
 				{
-					map->_map[y1][x1] = portal->_portal[idPortal]; 
+					map->_map[y1][x1] = portal->_portal[idPortal];
 					score += 50;
 					direct[j] = false;
 					brick->_isDestroyed[y1][x1] = true;

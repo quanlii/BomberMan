@@ -1,6 +1,7 @@
 #pragma once
 #include "Point2D.h"
 #include "Map2D.h"
+#include "UI.h"
 
 class Brick
 {
@@ -16,7 +17,7 @@ public:
 	int		GetNumberOfBrick();
 	void	InitBrick(Map2D* map);
 	void	DisplayBrick();
+
 private:
 	int		_numberOfBrick;
 };
-
